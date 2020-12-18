@@ -1,0 +1,53 @@
+/* changed the size of background image */
+body{
+    background-size: 100%; 
+    background-repeat:no-repeat; 
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#time{
+    font-size: 50px;
+    text-align: center;
+    color:rgb(255, 255, 255);
+    text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
+}
+/* changed settiing items' style  */
+#choose{
+    background-color: rgba(0, 0, 0, 0.315);
+    color: white;
+    text-align: center;
+}
+/* changed button setting style */
+#setting{
+    background-color: rgba(139, 139, 139, 0);
+    border: none;
+    color:white;
+}
+/* changed font style on greeting */
+h2{
+    text-align: center;
+    color: white;
+    font-weight: lighter;
+    text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
+    margin-top:3%;
+}
+
+#buttonSave{
+    margin-top: 20px;
+}
+/* added the text shadow on the content in More button */
+#more{
+    text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
+    color: white;
+}
+/* add margin top in More button   */
+#buttonMore{ 
+    margin-top:5%;
+}
+
+.moreButton{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+  
+}
