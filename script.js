@@ -13,17 +13,17 @@ date = DateTime.fromISO
 
 console.log('='+ DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
 // fetch and display the current APOD using the APOD API
-// fetch('https://api.nasa.gov/planetary/apod?api_key=TP1001u64MGPcbkI7r6a26a35Ji3u7vX59phGJH6&date=' + DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
-//     .then(response => {
-//         return response.json()
-//     })
-//     .then(data => {    
-//         console.log(data.url)
-//         document.body.style.backgroundImage = `url(${data.url})`   
-//     })
-//     .catch(error => {
-//         console.log(error.name,error.message)
-//     })
+fetch('https://api.nasa.gov/planetary/apod?api_key=TP1001u64MGPcbkI7r6a26a35Ji3u7vX59phGJH6&date=' + DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {    
+        console.log(data.url)
+        document.body.style.backgroundImage = `url(${data.url})`   
+    })
+    .catch(error => {
+        console.log(error.name,error.message)
+    })
 
 // setting greeting 
 function greeting(){
