@@ -11,7 +11,7 @@ body{
     color:rgb(255, 255, 255);
     text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
 }
-/* changed settiing items' style  */
+/* changed setting items' style  */
 #choose{
     background-color: rgba(0, 0, 0, 0.315);
     color: white;
@@ -22,6 +22,7 @@ body{
     background-color: rgba(139, 139, 139, 0);
     border: none;
     color:white;
+    text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
 }
 /* changed font style on greeting */
 h2{
@@ -40,11 +41,11 @@ h2{
     text-shadow: 0 0 5px #464444, 0 0 5px #2e2e2d; 
     color: white;
 }
-/* add margin top in More button   */
+/* added margin top in More button   */
 #buttonMore{ 
     margin-top:5%;
 }
-
+/* displayed the grid in More section */
 .moreButton{
     display: grid;
     grid-template-columns: 1fr 1fr;

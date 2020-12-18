@@ -1,4 +1,4 @@
-// add prototype
+// target elements 
 let $image = document.getElementById('image')
 let $more =  document.getElementById('more')
 let $time =  document.getElementById('time')
@@ -7,25 +7,23 @@ let $setting = document.getElementById('setting')
 let $choose = document.getElementById('choose')
 let $buttonMore = document.getElementById('buttonMore')
 let $buttonSave = document.getElementById('buttonSave')
-let $container = document.getElementById('container')
 var interval
 const DateTime = luxon.DateTime
 date = DateTime.fromISO
 
 console.log('='+ DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
-
-fetch('https://api.nasa.gov/planetary/apod?api_key=TP1001u64MGPcbkI7r6a26a35Ji3u7vX59phGJH6&date=2020-12-12')
-fetch('https://api.nasa.gov/planetary/apod?api_key=TP1001u64MGPcbkI7r6a26a35Ji3u7vX59phGJH6&date=' + DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
-    .then(response => {
-        return response.json()
-    })
-    .then(data => {    
-        console.log(data.url)
-        document.body.style.backgroundImage = `url(${data.url})`   
-    })
-    .catch(error => {
-        console.log(error.name,error.message)
-    })
+// fetch and display the current APOD using the APOD API
+// fetch('https://api.nasa.gov/planetary/apod?api_key=TP1001u64MGPcbkI7r6a26a35Ji3u7vX59phGJH6&date=' + DateTime.local().year + '-' + DateTime.local().month + '-' + DateTime.local().day)
+//     .then(response => {
+//         return response.json()
+//     })
+//     .then(data => {    
+//         console.log(data.url)
+//         document.body.style.backgroundImage = `url(${data.url})`   
+//     })
+//     .catch(error => {
+//         console.log(error.name,error.message)
+//     })
 
 // setting greeting 
 function greeting(){
@@ -39,6 +37,7 @@ function greeting(){
         $greeting.innerHTML = '<h2>GOOD EVENING</h2>'
     }
 } 
+// setting the content in settings menu
 $setting.addEventListener('click',function(event){
     event.preventDefault()
     $choose.innerHTML = `
@@ -55,6 +54,7 @@ $setting.addEventListener('click',function(event){
     <label for="secondsNo">No</label><br>
     <button id="buttonSave" type="submit" >Save</button>
     `  
+// When clicking Save, save the customized settings to local storage
     $choose.addEventListener('submit',function(event){
         // event.preventDefault()
         localStorage.setItem('12hourClock',$choose.hours.value)
@@ -62,7 +62,8 @@ $setting.addEventListener('click',function(event){
     })
        
 })
-// localStorage.setItem('12hourClock','true')
+
+// decide wether to show seconds based on setting
 let timeFormat = 0
 if (localStorage.getItem('showSeconds') == 'yes'){
     timeFormat = {hour: '2-digit', minute: '2-digit', hour12: (localStorage.getItem('12hourClock') == 'true'), second: '2-digit'}
@@ -77,64 +78,36 @@ $time.innerHTML = DateTime.local().toLocaleString(timeFormat);
 //reset timer
 clearInterval(interval)
 
-// Update the count down every 1 second
+// Update the greeting and time every 1 second
 interval = setInterval(function() {
     greeting()
     $time.innerHTML = DateTime.local().toLocaleString(timeFormat)
 },1000)
 
-
+$more.style.display = "none"
+// create event listener on More button 
 $buttonMore.addEventListener('click',function(event){
     if ($buttonMore.innerHTML == 'MORE'){
         console.log("is MORE")
         $buttonMore.innerHTML = 'LESS'
-        $more.innerHTML =  `
-        <div class="moreButton">
-        <div>
-            <h3>Day of the week</h3>
-            <div id="week"></div>
-        </div>
-        <div>
-            <h3>Day of the month</h3>
-            <div id="monthDay"></div>
-        </div>
-        <div>
-            <h3>Current Month</h3>
-            <div id="month"></div>
-        </div>
-        <div>
-            <h3>Current Year</h3>
-            <div id="years"></div>
-        </div>
-        <div>
-        `
+        $more.style.display = "block"
+      
    } else {
-        $more.innerHTML = ''
         $buttonMore.innerHTML = 'MORE'
         console.log("is LESS")
+        $more.style.display = "none"
    }
+  
 
-//  Return the name of the weekday
-    var d = new Date();
-    var weekday = new Array(7);
-        weekday[0] = "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
-    var n = weekday[d.getDay()];
-    var d = new Date();
-    document.getElementById("week").innerHTML = n ;
+//  Get the day of the week.
+    document.getElementById("week").innerHTML = DateTime.local().weekdayLong;
 // show day of the month   
     document.getElementById("monthDay").innerHTML = DateTime.local().day;
 // Current month
-    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    document.getElementById("month").innerHTML = months[d.getMonth()];
+    document.getElementById("month").innerHTML = DateTime.local().monthLong;
 
 //   returns the year of a date as a four digit number
-   document.getElementById("years").innerHTML = d.getFullYear();
+   document.getElementById("years").innerHTML = new Date().getFullYear();
 })
 
 
